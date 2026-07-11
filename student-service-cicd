@@ -8,10 +8,10 @@ pipeline{
                git branch: 'main', url: 'https://github.com/SAROJ-2207/student-service.git'
             }
         }
-    }
-        stage('mvn-build'){
+     stage('mvn-build'){
             steps{
-               sh 'mvn clean package'
+              sh 'mvn clean package'
             }
         }
+    }
 }
