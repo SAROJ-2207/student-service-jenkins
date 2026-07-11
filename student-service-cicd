@@ -3,9 +3,9 @@ pipeline{
         label 'microservice'
     }
      stages{
-        stage('Hello'){
+        stage('git-checkout'){
             steps{
-                echo 'Hello World from GitHub'
+               git branch: 'main', url: 'https://github.com/SAROJ-2207/student-service.git'
             }
         }
     }
