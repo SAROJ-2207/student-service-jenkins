@@ -13,5 +13,14 @@ pipeline{
               sh 'mvn clean package'
             }
         }
+     stage('sonar-scan'){
+            steps{
+              sh "mvn clean verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
+              -Dsonar.projectKey=student-service-sonarqube \
+              -Dsonar.projectName='student-service-sonarqube' \
+              -Dsonar.host.url=http://15.207.247.197:9000 \
+              -Dsonar.token=sqp_30c8c3f142332b7643b53b12039ea265671989de"
+            }
+        }
     }
 }
