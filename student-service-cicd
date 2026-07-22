@@ -25,10 +25,23 @@ pipeline{
     stage('upload-to-nexus'){
             steps{
               sh '''
-                    mvn clean deploy \
-                    -Dserver.student-service-nexus.username=admin \
-                    -Dserver.student-service-nexus.password=Admin@123456
-                  '''
+                    cat <<EOF > custom-settings.xml
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 https://maven.apache.org/xsd/settings-1.0.0.xsd">
+  <servers>
+    <server>
+      <id>student-service-nexus</id>
+      <username>admin</username>
+      <password>Admin@123456</password>
+    </server>
+  </servers>
+</settings>
+EOF
+
+                    mvn clean deploy -s custom-settings.xml
+                    rm -f custom-settings.xml
+                '''
             }
         }
     }
