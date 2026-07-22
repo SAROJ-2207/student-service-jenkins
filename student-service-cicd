@@ -22,5 +22,10 @@ pipeline{
               -Dsonar.token=sqp_30c8c3f142332b7643b53b12039ea265671989de"
             }
         }
+    stage('upload-to-nexus'){
+            steps{
+              sh 'mvn clean deploy'
+            }
+        }
     }
 }
