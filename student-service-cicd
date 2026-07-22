@@ -24,7 +24,11 @@ pipeline{
         }
     stage('upload-to-nexus'){
             steps{
-              sh 'mvn clean deploy'
+              sh '''
+                    mvn clean deploy \
+                    -Dserver.student-service-nexus.username=admin \
+                    -Dserver.student-service-nexus.password=Admin@123456
+                  '''
             }
         }
     }
