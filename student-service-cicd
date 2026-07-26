@@ -22,12 +22,12 @@ pipeline{
               -Dsonar.token=sqp_30c8c3f142332b7643b53b12039ea265671989de"
             }
         }
-    stage('Quality Gate'){
-         steps {
-            timeout(time: 2, unit: 'MINUTES'){
-                waitForQualityGate abortPipeline: true
-                }
-            }
+    stage('Quality Gate') {
+        steps {
+            timeout(time: 3, unit: 'MINUTES') {
+            waitForQualityGate abortPipeline: true
+             }
+           }
         }
     stage('upload-to-nexus'){
             steps{
