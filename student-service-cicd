@@ -44,7 +44,7 @@ pipeline{
                 '''
             }
         }
-    stage('Checkout Dockerfile) {
+    stage('Checkout Dockerfile') {
         steps {
             dir('docker-repo'){
                 git branch: 'main', url: 'https://github.com/SAROJ-2207/student-service.git'
