@@ -23,14 +23,14 @@ pipeline{
            // }
        // }
 stage('SonarQube Analysis'){
-        steps {
-            dir('git-repo'){
-                withSonarQubeEnv('sonarqube-server') {
-                        sh 'mvn sonar:sonar -Dsonar.projectKey=student-service'
-                    }
-                }
+    steps {
+        dir('git-repo'){
+            withSonarQubeEnv('sonarqube-server') {
+                sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=student-service'
             }
         }
+    }
+}
     stage('Quality Gate') {
         steps {
             timeout(time: 3, unit: 'MINUTES') {
