@@ -13,30 +13,17 @@ pipeline{
               sh 'mvn clean package'
             }
         }
-     //stage('sonar-scan'){
-            //steps{
-             // sh "mvn clean verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
-             // -Dsonar.projectKey=student-service-sonarqube \
-             // -Dsonar.projectName='student-service-sonarqube' \
-             // -Dsonar.host.url=http://3.110.44.182:9000 \
-              //-Dsonar.token=sqp_30c8c3f142332b7643b53b12039ea265671989de"
-           // }
-       // }
-stage('SonarQube Analysis'){
-    steps {
-                withSonarQubeEnv('sonarqube-server') {
-                sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=student-service'
-              }
-            }
-        }
-    stage('Quality Gate') {
-        steps {
-            timeout(time: 3, unit: 'MINUTES') {
-            waitForQualityGate abortPipeline: true
-             }
+     stage('sonar-scan'){
+            steps{
+             sh "mvn clean verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
+             -Dsonar.projectKey=student-service-sonarqube \
+             -Dsonar.projectName='student-service-sonarqube' \
+             -Dsonar.host.url=http://3.110.44.182:9000 \
+              -Dsonar.token=sqp_30c8c3f142332b7643b53b12039ea265671989de"
            }
-        }
-    stage('upload-to-nexus'){
+       }
+
+   stage('upload-to-nexus'){
             steps{
               sh '''
                     cat <<EOF > custom-settings.xml
