@@ -18,7 +18,7 @@ pipeline{
               sh "mvn clean verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
               -Dsonar.projectKey=student-service-sonarqube \
               -Dsonar.projectName='student-service-sonarqube' \
-              -Dsonar.host.url=http://13.203.229.97:9000 \
+              -Dsonar.host.url=http://3.110.44.182:9000 \
               -Dsonar.token=sqp_30c8c3f142332b7643b53b12039ea265671989de"
             }
         }
@@ -26,19 +26,18 @@ pipeline{
             steps{
               sh '''
                     cat <<EOF > custom-settings.xml
-<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
-          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 https://maven.apache.org/xsd/settings-1.0.0.xsd">
-  <servers>
-    <server>
-      <id>student-service-nexus</id>
-      <username>admin</username>
-      <password>Admin@123456</password>
-    </server>
-  </servers>
-</settings>
-EOF
-
+            <settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 https://maven.apache.org/xsd/settings-1.0.0.xsd">
+             <servers>
+                <server>
+                      <id>student-service-nexus</id>
+                      <username>admin</username>
+                      <password>Admin@123456</password>
+                </server>
+              </servers>
+            </settings>
+            EOF
                     mvn clean deploy -s custom-settings.xml
                     rm -f custom-settings.xml
                 '''
