@@ -18,7 +18,7 @@ pipeline{
              sh "mvn clean verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
              -Dsonar.projectKey=student-service-sonarqube \
              -Dsonar.projectName='student-service-sonarqube' \
-             -Dsonar.host.url=http://13.201.101.216:9000 \
+             -Dsonar.host.url=http://172.31.0.86:9000 \
               -Dsonar.token=sqp_30c8c3f142332b7643b53b12039ea265671989de"
            }
        }
